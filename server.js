@@ -87,7 +87,7 @@ mongoose.connect(dbUrl, {useNewUrlParser: true}, (err, db) => {
         })
     })
 
-    // -------------------- SHOW ROUTE --------------- 
+    // -------------------- SHOW ROUTE -----------------------//
     /* 
         1. GET request to /blogs/:id
         2. Get id of particular blog upon click
@@ -109,7 +109,7 @@ mongoose.connect(dbUrl, {useNewUrlParser: true}, (err, db) => {
         })
     }) 
 
-    // -------------------- EDIT/UPDATE ROUTE --------------------
+    // -------------------- EDIT/UPDATE ROUTE --------------------//
     /*
         1. Add edit route
         2. Add edit form
@@ -133,7 +133,7 @@ mongoose.connect(dbUrl, {useNewUrlParser: true}, (err, db) => {
         })
     })
 
-    //UPDATE ROUTE
+    // UPDATE ROUTE 
     app.put('/blogs/:id', (req, res) => {
         let editedBlogId = req.params.id
         Blog.findByIdAndUpdate(editedBlogId, {$set: req.body.blog}, {new: true}, (err, updatedBlog) => {
@@ -146,6 +146,30 @@ mongoose.connect(dbUrl, {useNewUrlParser: true}, (err, db) => {
             }
         })
     })
+
+    //-----------------DESTROY ROUTE ---------------------------//
+
+    /*
+        1. Include button for destroying blog on show page
+        2. Upon click re-direct to app.delete route on /blogs/:id
+        3. Use id to retrieve and destroy blog
+        4. Redirect to index page after destroying
+    
+    */
+
+    app.delete('/blogs/:id', (req, res) => {
+        let deletedBlogId = req.params.id
+        Blog.findByIdAndRemove(deletedBlogId, (err, deletedBlog) => {
+            if(err) {
+                console.log(err) 
+                return
+            } else {
+                console.log('blog was just deleted!')
+                res.redirect('/blogs')
+            }
+        })
+    })
+
 
     //------------------- END OF RESTful ROUTES -------------------//
     //Listen on port 3000 

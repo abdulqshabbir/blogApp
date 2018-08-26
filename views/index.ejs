@@ -3,9 +3,9 @@
 <h1> Welcome to our Animal Blog </h1>
 
 <% blogs.forEach(function(blog){ %>
-    <div class="ui main text container segment">
+    <div class="ui main text container segment" style="width: 60%">
         <h2><%=blog.title %></h2>
-        <img src=<%= blog.image %> height=200 width=300 >
+        <img class="ui centered medium bordered circular image" src=<%= blog.image %> height=200 width=300 >
         <br>
         <span><%=blog.created%></span>
         <p><%= blog.body.substring(0, 100)%>...</p>
