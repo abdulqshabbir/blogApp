@@ -13,6 +13,9 @@
             <p><%= blog.body %> 
         </div>
     </div>
+    <form class="ui form" action="/blogs/<%= blog._id %>/edit" method="get">
+        <input type="submit" class="ui button" value="Edit Blog">
+    </form>
 </div>
 
 <% include ./partials/footer.ejs %> 
